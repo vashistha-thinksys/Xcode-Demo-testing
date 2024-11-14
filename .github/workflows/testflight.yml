@@ -37,32 +37,30 @@ jobs:
       # Set up Fastlane Match to sync profiles
       - name: Set up Fastlane init
         env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}  # Pass MATCH_PASSWORD to environment variables
+          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
           FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
         run: |
           gem install fastlane
-          fastlane init
+          fastlane init --non-interactive --apple_id $FASTLANE_USER --bundle_identifier $APP_IDENTIFIER --skip_docs --skip_install
+
           
-      - name: Set up Fastlane match
-        env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}  # Pass MATCH_PASSWORD to environment variables
-          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
-          FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
-        run: |
-          gem install fastlane
-          fastlane match init
-          fastlane match development
+      # - name: Set up Fastlane match
+      #   env:
+      #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}  # Pass MATCH_PASSWORD to environment variables
+      #     FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
+      #     FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
 
 
-      - name: Set up fastlane environment
-        working-directory: ./ios
-        env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  
-          FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
-        run: |
-          bundle exec fastlane beta  # Run the Fastlane lane to upload to TestFlight
+
+      # - name: Set up fastlane environment
+      #   working-directory: ./ios
+      #   env:
+      #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      #     APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+      #     APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      #     APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+      #     FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  
+      #     FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
+      #   run: |
+      #     bundle exec fastlane beta  # Run the Fastlane lane to upload to TestFlight
