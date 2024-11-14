@@ -35,7 +35,7 @@ jobs:
           gem install bundler
           bundle install
       # Set up Fastlane Match to sync profiles
-      - name: Set up Fastlane Match
+      - name: Set up Fastlane init
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}  # Pass MATCH_PASSWORD to environment variables
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
@@ -44,10 +44,17 @@ jobs:
           gem install fastlane
           fastlane init
           
-       # Step to generate the missing xcconfig file
-      - name: Generate Generated.xcconfig file
+      - name: Set up Fastlane match
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}  # Pass MATCH_PASSWORD to environment variables
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
+          FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
         run: |
-          flutter build ios  # or the command that generates the file
+          gem install fastlane
+          fastlane match init
+          fastlane match development
+
+
       - name: Set up fastlane environment
         working-directory: ./ios
         env:
