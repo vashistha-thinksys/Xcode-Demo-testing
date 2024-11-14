@@ -45,12 +45,8 @@ jobs:
           APP_NAME: ${{ secrets.APP_NAME }}
 
         run: |
-          expect << EOF
-          spawn fastlane produce create --username "$FASTLANE_USER" --app_identifier "$APP_IDENTIFIER" --app_name "$APP_NAME"
-          expect "Enter something"
-          send "sms\r"
-          expect eof
-          EOF
+          gem install fastlane
+          fastlane produce create --username "$FASTLANE_USER" --app_identifier "$APP_IDENTIFIER" --app_name "$APP_NAME"
       # - name: Set up Fastlane match
       #   env:
       #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}  # Pass MATCH_PASSWORD to environment variables
