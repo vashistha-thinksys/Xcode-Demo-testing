@@ -24,23 +24,18 @@ jobs:
       # - name: List the contents of the ios_deployment_demo directory
       #   run: ls -R ios_deployment_demo  # List the directory structure inside ios_deployment_demo
 
-      - name: List the contents of the ios directory
-        run: ls -R ./ios  # List the directory structure of the ios folder
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
            ruby-version: '3.0'  # Specify the Ruby version compatible with Fastlane
 
       - name: Install dependencies
-        working-directory: ./ios
 
         run: |
           gem install bundler
           bundle install
       # Set up Fastlane Match to sync profiles
       - name: Set up Fastlane Match
-        working-directory: ./ios
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}  # Pass MATCH_PASSWORD to environment variables
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
@@ -51,7 +46,6 @@ jobs:
           
        # Step to generate the missing xcconfig file
       - name: Generate Generated.xcconfig file
-        working-directory: ./ios  # Adjust this if the file needs to be generated elsewhere
         run: |
           flutter build ios  # or the command that generates the file
       - name: Set up fastlane environment
