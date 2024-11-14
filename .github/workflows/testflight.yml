@@ -38,8 +38,8 @@ jobs:
       - name: Set up Fastlane init
         env:
           FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
-          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
-          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          # FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
           FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
           APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }} # fastlane init --non-interactive --apple_id $FASTLANE_USER --bundle_identifier $APP_IDENTIFIER --skip_docs --skip_install
           APP_NAME: ${{ secrets.APP_NAME }}
