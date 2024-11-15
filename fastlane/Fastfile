@@ -15,7 +15,8 @@ lane :release do
       duration: 1200,
       in_house: false
     )
-  
+    
+    ENV["FASTLANE_SKIP_GITHUB_ISSUES"] = "true"
     # Set up Match for code signing and provisioning profiles
     # Initialize Match for both init and development
     match(
