@@ -112,6 +112,7 @@ jobs:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           YOUR_TEAM_ID: ${{ secrets.TEAM_ID }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         run: |
           bundle exec fastlane create_app
 
