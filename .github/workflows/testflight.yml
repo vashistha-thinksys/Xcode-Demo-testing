@@ -113,7 +113,6 @@ jobs:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           YOUR_TEAM_ID: ${{ secrets.TEAM_ID }}
         run: |
-          bundle exec fastlane match init --git_url "https://github.com/vashistha-thinksys/Xcode-Demo-testing.git"
           bundle exec fastlane create_app
 
 

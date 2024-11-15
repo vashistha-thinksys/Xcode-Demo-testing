@@ -1,0 +1,2 @@
+git_url("https://github.com/your-username/your-private-repo.git")  # Replace with your private repository URL
+type("appstore")  
