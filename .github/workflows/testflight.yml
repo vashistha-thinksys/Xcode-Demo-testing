@@ -112,29 +112,29 @@ jobs:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
         run: |
-          bundle exec fastlane create_app
+          bundle exec fastlane ios create_app
 
 
 
-      # 6. Match: Handle certificates and provisioning profiles
-      - name: Set up Match for code signing
-        env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Password for the repository used by match
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-          APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
-          APP_NAME: ${{ secrets.APP_NAME }}
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
-          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
-        run: |
-          bundle exec fastlane match appstore # For App Store distribution signing
+      # # 6. Match: Handle certificates and provisioning profiles
+      # - name: Set up Match for code signing
+      #   env:
+      #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Password for the repository used by match
+      #     APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+      #     APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+      #     APP_NAME: ${{ secrets.APP_NAME }}
+      #     APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      #     APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
+      #     MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+      #   run: |
+      #     bundle exec fastlane match appstore # For App Store distribution signing
 
-      # 7. Build the app using Gym
-      - name: Build the iOS App
-        run: |
-          bundle exec fastlane gym
+      # # 7. Build the app using Gym
+      # - name: Build the iOS App
+      #   run: |
+      #     bundle exec fastlane gym
 
-      # 8. Upload to TestFlight
-      - name: Upload to TestFlight
-        run: |
-          bundle exec fastlane pilot
+      # # 8. Upload to TestFlight
+      # - name: Upload to TestFlight
+      #   run: |
+      #     bundle exec fastlane pilot
