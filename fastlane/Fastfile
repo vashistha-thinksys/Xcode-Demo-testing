@@ -9,7 +9,6 @@ lane :create_app do
       in_house: false
     ) 
 
-    sh "xcodebuild -workspace Runner.xcworkspace -scheme Runner -destination 'generic/platform=iOS' -archivePath '~/Library/Developer/Xcode/Archives/Runner.xcarchive' archive -allowProvisioningUpdates"
 
      # 4. Build the app using Gym
      gym(
