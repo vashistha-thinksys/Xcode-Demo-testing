@@ -18,7 +18,7 @@ lane :release do
   
     # Set up Match for code signing and provisioning profiles
     match(
-      type: "appstore", # Or development, adhoc, enterprise
+      type: "development", # Or development, adhoc, enterprise
       git_url: ENV['MATCH_GIT_URL'], # Repository for Match to store certificates
       storage_mode: "git", # Specify storage mode to avoid prompt
       readonly: false # Allow match to write to the repository

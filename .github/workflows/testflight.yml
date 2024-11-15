@@ -108,7 +108,7 @@ jobs:
           MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
         run: |
           gem install fastlane
-          fastlane match init
+          bundle exec fastlane match init
 
 
       # 6. Match: Handle certificates and provisioning profiles
