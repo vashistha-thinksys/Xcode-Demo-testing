@@ -13,7 +13,6 @@ lane :create_app do
       api_key: api_key,
       ipa: ENV['OUTPUT_NAME'],
       skip_waiting_for_build_processing: true,
-      username: ENV['FASTLANE_USER'],
       apple_id: ENV['APPLE_ID'],
       submit_beta_review: true
       )
