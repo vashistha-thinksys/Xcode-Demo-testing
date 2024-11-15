@@ -10,7 +10,7 @@ lane :create_app do
     ) 
 
     match(
-    type: "appstore",
+    type: "development",
     app_identifier: ENV['APP_IDENTIFIER'],
     username: ENV['FASTLANE_USER'],
     platform: "ios"
@@ -18,7 +18,7 @@ lane :create_app do
      # 4. Build the app using Gym
      gym(
       scheme: "Xcode Demo",               # Your app's scheme, passed dynamically
-      export_method: "app-store",              # Use 'ad-hoc' for adhoc distribution
+      export_method: "development",              # Use 'ad-hoc' for adhoc distribution
       output_name: ENV['OUTPUT_NAME'],         # The output .ipa file name
       clean: true,                              # Optional: Clean the build before compiling
       export_team_id: ENV['YOUR_TEAM_ID']
@@ -50,7 +50,7 @@ lane :create_app do
     # # Set up Match for code signing and provisioning profiles
     # # Initialize Match for both init and development
     # match(
-    #   type: "appstore", # Run for development
+    #   type: "development", # Run for development
     #   git_url: ENV['MATCH_GIT_URL'], # Repository for Match to store certificates
     #   storage_mode: "git", # Specify storage mode to avoid prompt
     #   readonly: false # Allow match to write to the repository
