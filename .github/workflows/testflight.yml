@@ -105,7 +105,7 @@ jobs:
           APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
         run: |
           gem install fastlane
-          fastlane init
+          fastlane match init
 
 
       # 6. Match: Handle certificates and provisioning profiles
@@ -113,7 +113,7 @@ jobs:
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Password for the repository used by match
         run: |
-          bundle exec fastlane match appstore # For App Store distribution signing
+          bundle exec fastlane match development # For App Store distribution signing
 
       # 7. Build the app using Gym
       - name: Build the iOS App

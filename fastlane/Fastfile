@@ -22,7 +22,7 @@ platform :ios do
 
     # 3. Create and manage provisioning profiles using Match
     match(
-      type: "appstore",                   # Use 'development', 'adhoc', or 'enterprise' if needed
+      type: "development",                   # Use 'development', 'adhoc', or 'enterprise' if needed
       app_identifier: "com.example.myapp", # Your app's bundle ID
       readonly: false                     # Allow creation of new certificates
     )
