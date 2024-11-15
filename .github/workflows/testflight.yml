@@ -96,6 +96,7 @@ jobs:
         run: |
           gem install bundler
           bundle install
+          gem install fastlane
 
       # 4. Initialize Fastlane (this is optional if you have already set up Fastlane in your project)
       - name: Initialize Fastlane
@@ -108,8 +109,7 @@ jobs:
           APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
           MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
         run: |
-          gem install fastlane
-          bundle exec fastlane match init
+          fastlane match init
 
 
       # 6. Match: Handle certificates and provisioning profiles
