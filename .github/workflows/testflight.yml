@@ -99,17 +99,17 @@ jobs:
           gem install fastlane
 
       # 4. Initialize Fastlane (this is optional if you have already set up Fastlane in your project)
-      - name: Initialize Fastlane 
-        env:
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-          APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
-          APP_NAME: ${{ secrets.APP_NAME }}
-          FASTLANE_SKIP_GITHUB_ISSUES: "true"
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
-          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
-        run: |
-          fastlane match init storage_mode: "git" git_url: "https://github.com/your_repo/certificates"
+      # - name: Initialize Fastlane 
+      #   env:
+      #     APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+      #     APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+      #     APP_NAME: ${{ secrets.APP_NAME }}
+      #     FASTLANE_SKIP_GITHUB_ISSUES: "true"
+      #     APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      #     APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
+      #     MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+      #   run: |
+      #     fastlane match init storage_mode: "git" git_url: "https://github.com/your_repo/certificates"
 
 
 
