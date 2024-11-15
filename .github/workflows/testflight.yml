@@ -108,6 +108,7 @@ jobs:
           MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
         run: |
           gem install fastlane
+          fastlane init
           bundle exec fastlane match init
 
 
