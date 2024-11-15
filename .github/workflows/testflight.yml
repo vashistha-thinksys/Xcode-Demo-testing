@@ -94,6 +94,7 @@ jobs:
       # 3. Install dependencies (if you have a Gemfile and CocoaPods)
       - name: Install dependencies
         run: |
+          gem install bundler
           bundle install
 
       # 4. Initialize Fastlane (this is optional if you have already set up Fastlane in your project)
@@ -103,6 +104,7 @@ jobs:
           APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
           APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
         run: |
+          gem install fastlane
           fastlane init
 
 
