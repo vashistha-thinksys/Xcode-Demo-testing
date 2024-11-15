@@ -110,7 +110,8 @@ jobs:
           MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
           APPLE_ID: ${{ secrets.FASTLANE_USER }}
         run: |
-          bundle exec fastlane produce
+          bundle exec fastlane create_app
+
 
 
       # 6. Match: Handle certificates and provisioning profiles
