@@ -9,7 +9,7 @@ lane :create_app do
       in_house: false
     ) 
 
-
+    match(type: "development")
      # 4. Build the app using Gym
      gym(
       scheme: "Xcode Demo",               # Your app's scheme, passed dynamically
