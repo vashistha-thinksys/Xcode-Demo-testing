@@ -7,7 +7,9 @@ lane :create_app do
       key_filepath: "./AuthKey_5LWS2HQH72.p8",
       duration: 1200,
       in_house: false
-    )
+    ) 
+
+    pilot
 
     produce(
       app_identifier: ENV['APP_IDENTIFIER'], # The bundle identifier for your app
