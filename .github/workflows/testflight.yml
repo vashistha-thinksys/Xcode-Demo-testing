@@ -124,7 +124,7 @@ jobs:
           APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
           MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
         run: |
-          bundle exec fastlane match development # For App Store distribution signing
+          bundle exec fastlane match appstore # For App Store distribution signing
 
       # 7. Build the app using Gym
       - name: Build the iOS App
