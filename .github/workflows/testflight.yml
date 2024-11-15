@@ -108,6 +108,7 @@ jobs:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
           MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+          APPLE_ID: ${{ secrets.FASTLANE_USER }}
         run: |
           bundle exec fastlane produce
 
