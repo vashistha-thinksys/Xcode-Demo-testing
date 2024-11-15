@@ -1,4 +1,4 @@
-lane :release do
+lane :create_app do
     # Create a new app on App Store Connect if it doesn't exist
     produce(
       app_identifier: ENV['APP_IDENTIFIER'], # The bundle identifier for your app
