@@ -11,7 +11,7 @@ lane :create_app do
 
      # 4. Build the app using Gym
      gym(
-      scheme: "MyAppScheme",               # Your app's scheme, passed dynamically
+      scheme: "Xcode Demo",               # Your app's scheme, passed dynamically
       export_method: "app-store",              # Use 'ad-hoc' for adhoc distribution
       output_name: ENV['OUTPUT_NAME'],         # The output .ipa file name
       clean: true                              # Optional: Clean the build before compiling
