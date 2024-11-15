@@ -100,9 +100,12 @@ jobs:
       # 4. Initialize Fastlane (this is optional if you have already set up Fastlane in your project)
       - name: Initialize Fastlane
         env:
-          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
-          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+          APP_NAME: ${{ secrets.APP_NAME }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
+          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
         run: |
           gem install fastlane
           fastlane match init
@@ -112,6 +115,12 @@ jobs:
       - name: Set up Match for code signing
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Password for the repository used by match
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+          APP_NAME: ${{ secrets.APP_NAME }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
+          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
         run: |
           bundle exec fastlane match development # For App Store distribution signing
 

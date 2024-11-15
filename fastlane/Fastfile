@@ -1,43 +1,41 @@
-default_platform(:ios)
-
-platform :ios do
-  lane :setup_and_release do
-    # 1. Use App Store Connect API key to avoid 2FA
-    app_store_connect_api_key(
-      key_id: "5LWS2HQH72",
-      issuer_id: "69a6de7a-9e78-47e3-e053-5b8c7c11a4d1",
-      key_filepath: "./AuthKey_5LWS2HQH72.p8",
-      duration: 1200, # Optional: max 1200
-      in_house: false # Optional: set to true if using enterprise account
-    )
-
-    # 2. Create the app identifier if it doesn't exist yet
+lane :release do
+    # Create a new app on App Store Connect if it doesn't exist
     produce(
-      app_identifier: "com.example.myapp", # Your app's bundle ID
-      app_name: "My App",                  # Your app's name
-      sku: "myapp123",                     # A unique SKU for your app
-      language: "English",                 # Primary language for the app
-      skip_itc: false                      # Create app in App Store Connect
+      app_identifier: ENV['APP_IDENTIFIER'], # The bundle identifier for your app
+      app_name: ENV['APP_NAME'], # The name of your app
+      username: ENV['APPLE_ID'], # Your Apple ID email
+      skip_itc: false # Create the app in both the App Store Connect and the Developer Portal
     )
-
-    # 3. Create and manage provisioning profiles using Match
+  
+    # Set up App Store Connect API key for authentication
+    app_store_connect_api_key(
+      key_id: ENV['APP_STORE_CONNECT_API_KEY_ID'],
+      issuer_id: ENV['APP_STORE_CONNECT_ISSUER_ID'],
+      key_filepath: ENV['APP_STORE_KEY_FILEPATH'],
+      duration: 1200,
+      in_house: false
+    )
+  
+    # Set up Match for code signing and provisioning profiles
     match(
-      type: "development",                   # Use 'development', 'adhoc', or 'enterprise' if needed
-      app_identifier: "com.example.myapp", # Your app's bundle ID
-      readonly: false                     # Allow creation of new certificates
+      type: "appstore", # Or development, adhoc, enterprise
+      git_url: ENV['MATCH_GIT_URL'], # Repository for Match to store certificates
+      storage_mode: "git", # Specify storage mode to avoid prompt
+      readonly: false # Allow match to write to the repository
     )
-
-    # 4. Build the app
+  
+    # 4. Build the app using Gym
     gym(
-      scheme: "MyAppScheme",               # Replace with your app's scheme
-      export_method: "app-store",          # Use 'ad-hoc' for adhoc distribution
-      output_name: "MyApp.ipa"             # The output .ipa file name
+      scheme: ENV['APP_SCHEME'],               # Your app's scheme, passed dynamically
+      export_method: "app-store",              # Use 'ad-hoc' for adhoc distribution
+      output_name: ENV['OUTPUT_NAME'],         # The output .ipa file name
+      clean: true                              # Optional: Clean the build before compiling
     )
-
-    # 5. Upload the build to TestFlight
+  
+    # 5. Upload the build to TestFlight using Pilot
     pilot(
-      ipa: "MyApp.ipa",                    # The path to the .ipa file
-      skip_waiting_for_build_processing: true # Optional: skip waiting for processing
+      ipa: ENV['OUTPUT_NAME'],                 # The path to the generated .ipa file
+      skip_waiting_for_build_processing: true  # Skip waiting for build processing
     )
   end
-end
+  
