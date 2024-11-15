@@ -110,6 +110,7 @@ jobs:
           MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
           APPLE_ID: ${{ secrets.FASTLANE_USER }}
         run: |
+          bash new.bash
           bundle exec fastlane create_app
 
 
