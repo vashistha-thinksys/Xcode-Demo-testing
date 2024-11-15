@@ -8,9 +8,13 @@ lane :create_app do
       duration: 1200,
       in_house: false
     ) 
-    app_identifier(ENV['APP_IDENTIFIER'])
 
-    match(type: "appstore")
+    match(
+    type: "appstore",
+    app_identifier: ENV['APP_IDENTIFIER'],
+    username: ENV['FASTLANE_USER'],
+    platform: "ios"
+    )
      # 4. Build the app using Gym
      gym(
       scheme: "Xcode Demo",               # Your app's scheme, passed dynamically
