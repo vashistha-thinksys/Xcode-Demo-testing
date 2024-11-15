@@ -112,7 +112,7 @@ jobs:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
         run: |
-          bundle exec fastlane ios create_app
+          bundle exec fastlane create_app
 
 
 

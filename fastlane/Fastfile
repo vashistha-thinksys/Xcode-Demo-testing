@@ -9,9 +9,19 @@ lane :create_app do
       in_house: false
     ) 
 
+     # 4. Build the app using Gym
+     gym(
+      scheme: ENV['APP_NAME'],               # Your app's scheme, passed dynamically
+      export_method: "development",              # Use 'ad-hoc' for adhoc distribution
+      output_name: ENV['OUTPUT_NAME'],         # The output .ipa file name
+      clean: true                              # Optional: Clean the build before compiling
+    )
+  
+     ipa_path = "#{ENV['APP_NAME']}.ipa"
+
     pilot(
       api_key: api_key,
-      ipa: ENV['OUTPUT_NAME'],
+      ipa: ipa_path,
       skip_waiting_for_build_processing: true,
       apple_id: ENV['APPLE_ID'],
       submit_beta_review: true
@@ -47,14 +57,7 @@ lane :create_app do
     # )
 
   
-    # # 4. Build the app using Gym
-    # gym(
-    #   scheme: ENV['APP_SCHEME'],               # Your app's scheme, passed dynamically
-    #   export_method: "app-store",              # Use 'ad-hoc' for adhoc distribution
-    #   output_name: ENV['OUTPUT_NAME'],         # The output .ipa file name
-    #   clean: true                              # Optional: Clean the build before compiling
-    # )
-  
+   
     # # 5. Upload the build to TestFlight using Pilot
     # pilot(
     #   ipa: ENV['OUTPUT_NAME'],                 # The path to the generated .ipa file
