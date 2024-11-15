@@ -17,12 +17,21 @@ lane :release do
     )
   
     # Set up Match for code signing and provisioning profiles
+    # Initialize Match for both init and development
     match(
-      type: "development", # Or development, adhoc, enterprise
+      type: "development", # Run for development
       git_url: ENV['MATCH_GIT_URL'], # Repository for Match to store certificates
       storage_mode: "git", # Specify storage mode to avoid prompt
       readonly: false # Allow match to write to the repository
     )
+
+    match(
+      type: "init", # Initialize match
+      git_url: ENV['MATCH_GIT_URL'], # Repository for Match to store certificates
+      storage_mode: "git", # Specify storage mode to avoid prompt
+      readonly: false # Allow match to write to the repository
+    )
+
   
     # 4. Build the app using Gym
     gym(
