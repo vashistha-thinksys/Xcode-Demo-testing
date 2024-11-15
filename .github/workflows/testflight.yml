@@ -1,68 +1,130 @@
-name: TestFlight Deployment
+# name: TestFlight Deployment
+
+# on:
+#   push:
+#     branches:
+#       - main  # Replace 'main' with your branch name if different
+
+# jobs:
+#   build:
+#     runs-on: macos-latest
+
+#     steps:
+#       - name: Check out the repository
+#         uses: actions/checkout@v2
+#       # Step to set up Flutter with the same version you are using locally
+#       - name: Set up Flutter
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter_version: '3.22.2'  # Set the version of Flutter to match your local version
+#       # Debugging: List the directory structure
+#       - name: List current directory structure
+#         run: pwd  # Print the current working directory
+
+#       # - name: List the contents of the ios_deployment_demo directory
+#       #   run: ls -R ios_deployment_demo  # List the directory structure inside ios_deployment_demo
+
+#       - name: Set up Ruby
+#         uses: ruby/setup-ruby@v1
+#         with:
+#            ruby-version: '3.0'  # Specify the Ruby version compatible with Fastlane
+
+#       - name: Install dependencies
+
+#         run: |
+#           gem install bundler
+#           bundle install
+#       # Set up Fastlane Match to sync profiles
+#       - name: Set up Fastlane init
+#         env:
+#           FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+#           FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+#           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
+#           FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
+#           APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }} # fastlane init --non-interactive --apple_id $FASTLANE_USER --bundle_identifier $APP_IDENTIFIER --skip_docs --skip_install
+#           APP_NAME: ${{ secrets.APP_NAME }}
+
+#         run: |
+#           gem install fastlane
+#           fastlane produce create --username "$FASTLANE_USER" --app_identifier "$APP_IDENTIFIER" --app_name "$APP_NAME"
+#       # - name: Set up Fastlane match
+#       #   env:
+#       #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}  # Pass MATCH_PASSWORD to environment variables
+#       #     FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
+#       #     FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
+
+
+
+#       # - name: Set up fastlane environment
+#       #   working-directory: ./ios
+#       #   env:
+#       #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+#       #     APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+#       #     APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+#       #     APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+#       #     FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  
+#       #     FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
+#       #   run: |
+#       #     bundle exec fastlane beta  # Run the Fastlane lane to upload to TestFlight
+
+
+name: iOS Release Workflow
 
 on:
   push:
     branches:
-      - main  # Replace 'main' with your branch name if different
+      - main # Runs the workflow when code is pushed to the main branch
 
 jobs:
-  build:
+  build_and_release:
     runs-on: macos-latest
 
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2
-      # Step to set up Flutter with the same version you are using locally
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter_version: '3.22.2'  # Set the version of Flutter to match your local version
-      # Debugging: List the directory structure
-      - name: List current directory structure
-        run: pwd  # Print the current working directory
+      # 1. Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      # - name: List the contents of the ios_deployment_demo directory
-      #   run: ls -R ios_deployment_demo  # List the directory structure inside ios_deployment_demo
-
+      # 2. Set up Ruby (for Fastlane)
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-           ruby-version: '3.0'  # Specify the Ruby version compatible with Fastlane
+          ruby-version: '3.0' # Specify your Ruby version here
+          bundler-cache: true  # Caches installed gems for future runs
 
+      # 3. Install dependencies (if you have a Gemfile and CocoaPods)
       - name: Install dependencies
-
         run: |
-          gem install bundler
           bundle install
-      # Set up Fastlane Match to sync profiles
-      - name: Set up Fastlane init
+
+      # 4. Initialize Fastlane (this is optional if you have already set up Fastlane in your project)
+      - name: Initialize Fastlane
         env:
-          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
-          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
-          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
-          FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
-          APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }} # fastlane init --non-interactive --apple_id $FASTLANE_USER --bundle_identifier $APP_IDENTIFIER --skip_docs --skip_install
-          APP_NAME: ${{ secrets.APP_NAME }}
-
+          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
+          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+          APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
         run: |
-          gem install fastlane
-          fastlane produce create --username "$FASTLANE_USER" --app_identifier "$APP_IDENTIFIER" --app_name "$APP_NAME"
-      # - name: Set up Fastlane match
-      #   env:
-      #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}  # Pass MATCH_PASSWORD to environment variables
-      #     FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  # Pass FASTLANE_PASSWORD to environment variables
-      #     FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
+          fastlane init
 
+      # 5. Set up App Store Connect API key (using GitHub Secrets for security)
+      - name: Set up App Store Connect API Key
+        env:
+          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
+          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+          APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
 
+      # 6. Match: Handle certificates and provisioning profiles
+      - name: Set up Match for code signing
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Password for the repository used by match
+        run: |
+          bundle exec fastlane match appstore # For App Store distribution signing
 
-      # - name: Set up fastlane environment
-      #   working-directory: ./ios
-      #   env:
-      #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-      #     APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
-      #     APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-      #     APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-      #     FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}  
-      #     FASTLANE_APPLE_ID_PASSWORD: ${{ secrets.FASTLANE_APPLE_ID_PASSWORD }}  # Apple ID password
-      #   run: |
-      #     bundle exec fastlane beta  # Run the Fastlane lane to upload to TestFlight
+      # 7. Build the app using Gym
+      - name: Build the iOS App
+        run: |
+          bundle exec fastlane gym
+
+      # 8. Upload to TestFlight
+      - name: Upload to TestFlight
+        run: |
+          bundle exec fastlane pilot
