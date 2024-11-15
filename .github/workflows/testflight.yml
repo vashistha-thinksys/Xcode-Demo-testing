@@ -111,7 +111,6 @@ jobs:
           APPLE_ID: ${{ secrets.FASTLANE_USER }}
         run: |
           bash new.bash
-          cat hello.p8
           bundle exec fastlane create_app
 
 
