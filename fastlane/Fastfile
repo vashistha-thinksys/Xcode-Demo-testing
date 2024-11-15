@@ -9,7 +9,14 @@ lane :create_app do
       in_house: false
     ) 
 
-    pilot(api_key: api_key)
+    pilot(
+      api_key: api_key,
+      ipa: ENV['OUTPUT_NAME'],
+      skip_waiting_for_build_processing: true,
+      username: ENV['APPLE_ID'],
+      apple_id: ENV['APPLE_ID'],
+      submit_beta_review: true
+      )
 
     # produce(
     #   app_identifier: ENV['APP_IDENTIFIER'], # The bundle identifier for your app
