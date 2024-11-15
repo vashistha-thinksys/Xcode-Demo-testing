@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # File name
-file_name="hello.p8"
+file_name="AuthKey_5LWS2HQH72.p8"
 
 # Check if APP_STORE_KEY_FILEPATH is set
 if [[ -z "$APP_STORE_KEY_FILEPATH" ]]; then
