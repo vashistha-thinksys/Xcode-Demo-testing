@@ -109,10 +109,7 @@ jobs:
           APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
           MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
         run: |
-          bundle exec fastlane match init <<EOF
-          git
-          https://github.com/vashistha-thinksys/Xcode-Demo-testing.git
-          EOF
+          fastlane produce
 
 
       # 6. Match: Handle certificates and provisioning profiles

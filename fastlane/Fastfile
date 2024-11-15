@@ -4,7 +4,9 @@ lane :release do
       app_identifier: ENV['APP_IDENTIFIER'], # The bundle identifier for your app
       app_name: ENV['APP_NAME'], # The name of your app
       username: ENV['APPLE_ID'], # Your Apple ID email
-      skip_itc: false # Create the app in both the App Store Connect and the Developer Portal
+      skip_itc: false, # Create the app in both the App Store Connect and the Developer Portal
+      language: "english",
+      sku: "example001"
     )
   
     # Set up App Store Connect API key for authentication
