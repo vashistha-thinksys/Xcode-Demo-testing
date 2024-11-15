@@ -4,7 +4,7 @@ lane :create_app do
     app_store_connect_api_key(
       key_id: ENV['APP_STORE_CONNECT_API_KEY_ID'],
       issuer_id: ENV['APP_STORE_CONNECT_ISSUER_ID'],
-      key_filepath: './hello.p8',
+      key_filepath: './AuthKey_5LWS2HQH72.p8',
       duration: 1200,
       in_house: false
     )
