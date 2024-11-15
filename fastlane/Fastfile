@@ -11,13 +11,13 @@ lane :create_app do
 
      # 4. Build the app using Gym
      gym(
-      scheme: ENV['APP_NAME'],               # Your app's scheme, passed dynamically
-      export_method: "development",              # Use 'ad-hoc' for adhoc distribution
+      scheme: "MyAppScheme",               # Your app's scheme, passed dynamically
+      export_method: "app-store",              # Use 'ad-hoc' for adhoc distribution
       output_name: ENV['OUTPUT_NAME'],         # The output .ipa file name
       clean: true                              # Optional: Clean the build before compiling
     )
   
-     ipa_path = "#{ENV['APP_NAME']}.ipa"
+     ipa_path = "#{ENV['OUTPUT_NAME']}.ipa"
 
     pilot(
       api_key: api_key,
