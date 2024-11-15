@@ -99,8 +99,7 @@ jobs:
           gem install fastlane
 
       # 4. Initialize Fastlane (this is optional if you have already set up Fastlane in your project)
-      - name: Initialize Fastlane
-        working-directory: ./fastlane  
+      - name: Initialize Fastlane 
         env:
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
@@ -114,7 +113,6 @@ jobs:
 
       # 6. Match: Handle certificates and provisioning profiles
       - name: Set up Match for code signing
-        working-directory: ./fastlane 
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Password for the repository used by match
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
