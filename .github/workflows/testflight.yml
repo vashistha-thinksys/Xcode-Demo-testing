@@ -105,12 +105,6 @@ jobs:
         run: |
           fastlane init
 
-      # 5. Set up App Store Connect API key (using GitHub Secrets for security)
-      - name: Set up App Store Connect API Key
-        env:
-          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
-          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
-          APP_STORE_KEY_FILEPATH: ${{ secrets.APP_STORE_KEY_FILEPATH }}
 
       # 6. Match: Handle certificates and provisioning profiles
       - name: Set up Match for code signing
