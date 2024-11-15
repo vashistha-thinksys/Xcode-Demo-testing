@@ -1,8 +1,4 @@
-default_platform(:ios)
-
-platform :ios do
-  desc "Push a new beta build to TestFlight"
-  lane :create_app do
+lane :create_app do
     # Create a new app on App Store Connect if it doesn't exist
 
     api_key = app_store_connect_api_key(
@@ -15,16 +11,16 @@ platform :ios do
 
     sh "xcodebuild -workspace Runner.xcworkspace -scheme Runner -destination 'generic/platform=iOS' -archivePath '~/Library/Developer/Xcode/Archives/Runner.xcarchive' archive -allowProvisioningUpdates"
 
-      # 4. Build the app using Gym
-      gym(
+     # 4. Build the app using Gym
+     gym(
       scheme: "Xcode Demo",               # Your app's scheme, passed dynamically
       export_method: "app-store",              # Use 'ad-hoc' for adhoc distribution
       output_name: ENV['OUTPUT_NAME'],         # The output .ipa file name
-      export_team_id: ENV['YOUR_TEAM_ID'], 
-      clean: true                              # Optional: Clean the build before compiling
+      clean: true,                              # Optional: Clean the build before compiling
+      export_team_id: ENV['YOUR_TEAM_ID']
     )
-
-      ipa_path = "#{ENV['OUTPUT_NAME']}.ipa"
+  
+     ipa_path = "#{ENV['OUTPUT_NAME']}.ipa"
 
     pilot(
       api_key: api_key,
@@ -42,7 +38,7 @@ platform :ios do
     #   language: "english",
     #   sku: "example001"
     # )
-
+  
     # # Set up App Store Connect API key for authentication
     
     
@@ -63,8 +59,8 @@ platform :ios do
     #   readonly: false # Allow match to write to the repository
     # )
 
-
-    
+  
+   
     # # 5. Upload the build to TestFlight using Pilot
     # pilot(
     #   ipa: ENV['OUTPUT_NAME'],                 # The path to the generated .ipa file
